@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+       <encoder>
+            <pattern>oauth server %d{yyyy-MM-dd HH:mm:ss} %level %class:%line - %msg%n</pattern>
+        </encoder>
+    </appender>
+     <appender name="FILE" 
+        class="ch.qos.logback.core.rolling.RollingFileAppender">  
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">  
+            <FileNamePattern>${LOG_PATH}/oauth_server.%d{yyyy-MM-dd}.%i.log</FileNamePattern>  
+            <maxFileSize>250MB</maxFileSize> 
+            <MaxHistory>10</MaxHistory>  
+        </rollingPolicy>  
+        <layout class="ch.qos.logback.classic.PatternLayout">  
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n  
+            </pattern>  
+       </layout>  
+    </appender>   
+
+    <logger name="com.springframework" additivity="false">        
+        <level value="DEBUG" />
+        <appender-ref ref="CONSOLE" /> 
+        <appender-ref ref="FILE" />
+    </logger>
+	<logger name="com.chinawayltd" additivity="false">        
+        <level value="DEBUG" />
+        <appender-ref ref="CONSOLE" /> 
+        <appender-ref ref="FILE" />
+    </logger>
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</root>
+    
+</configuration>
